@@ -5,12 +5,11 @@ import actions from '../store/actions'
 
 const EditNoteScreen = ({route, navigation, notes, handleEditNote}) => {
     const { noteId } = route.params;
-    const selectedNote = notes.find(item => item.id === noteId)
-    const [note, setNote] = useState(selectedNote.note)
+    const [note, setNote] = useState(notes[noteId].note)
     const handleSaveNote = () => {
-        const currentNoteIndex = notes.findIndex(item => item.id === noteId)
-        notes[currentNoteIndex].note = note
-        handleEditNote([...notes])
+        notes[noteId].note = note
+        const updatedNote = notes[noteId]
+        handleEditNote(noteId, updatedNote)
         navigation.navigate('NotesScreen')
     }
     return (

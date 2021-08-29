@@ -1,49 +1,63 @@
 import auth from '@react-native-firebase/auth';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
+import database from '@react-native-firebase/database';
 
-const onGoogleButtonPress =  () => {
+const onGoogleButtonPress = () => {
   return async (dispatch, getState) => {
-  // Get the users ID token
-  const { idToken } = await GoogleSignin.signIn();
+    // Get the users ID token
+    const { idToken } = await GoogleSignin.signIn();
 
-  // Create a Google credential with the token
-  const googleCredential = auth.GoogleAuthProvider.credential(idToken);
+    // Create a Google credential with the token
+    const googleCredential = auth.GoogleAuthProvider.credential(idToken);
 
-  // Sign-in the user with the credential
-  return auth().signInWithCredential(googleCredential);
+    // Sign-in the user with the credential
+    return auth().signInWithCredential(googleCredential);
   }
 }
 
-const handleLogin = (value) => {
-    return {
-      type: 'LOGIN',
-      payload: value
-    };
-  }
+const handleLogin = (value, user) => {
+  return {
+    type: 'LOGIN',
+    payload: value,
+    user
+  };
+}
 
-  const handleDeleteNote = (id) => {
+const handleDeleteNote = (id) => {
+  return (dispatch, getState) => {
+    const uid = getState().notesApp.user.user.uid
+    database().ref(`notes/${uid}`).child(id).remove();
+    dispatch(handleGetUserNotes())
+  }
+}
+
+const handleGetUserNotes = () => {
+  return (dispatch, getState) => {
+  const uid = getState().notesApp.user.user.uid
+  database()
+  .ref(`notes/${uid}`)
+  .once('value')
+  .then(snapshot => {
+    console.log('User data: ', snapshot.val());
+    dispatch(handleNotes(snapshot.val()))
+  });
+}
+}
+
+const handleCreateNote = (newNote) => {
+  return (dispatch, getState) => {
+    const uid = getState().notesApp.user.user.uid
+    database().ref(`notes/${uid}`).push({...newNote})
+    dispatch(handleGetUserNotes())
+  }
+}
+
+  const handleEditNote = (id, updates) => {
     return (dispatch, getState) => {
-      const notes = getState().notesApp.notes
-      const noteToBeDeleted = notes.findIndex(note => note.id === id)
-      if (noteToBeDeleted > -1) {
-        notes.splice(noteToBeDeleted,1)
-        dispatch(handleNotes([...notes]))
-      }
+      const uid = getState().notesApp.user.user.uid
+      database().ref(`notes/${uid}`).child(id).update(updates)
+      dispatch(handleGetUserNotes())
     }
-  }
-
-  const handleCreateNote = (newNote) => {
-    return (dispatch, getState) => {
-    const notes = getState().notesApp.notes
-    const updatedNotes = [...notes, newNote]
-    dispatch(handleNotes(updatedNotes))
-    }
-  }
-
-  const handleEditNote = (notes) => {
-    return (dispatch) => {
-      dispatch(handleNotes(notes))
-      }
   }
 
   const handleNotes = (notes) => {
@@ -58,5 +72,6 @@ const handleLogin = (value) => {
     handleDeleteNote,
     handleCreateNote,
     handleEditNote,
-    onGoogleButtonPress
+    onGoogleButtonPress,
+    handleGetUserNotes
   }

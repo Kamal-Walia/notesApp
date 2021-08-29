@@ -3,7 +3,7 @@ import { View, Text, TouchableOpacity, TextInput } from 'react-native';
 import { connect } from 'react-redux';
 import actions from '../store/actions'
 
-const AddNoteScreen = ({ navigation, notes, handleCreateNote }) => {
+const AddNoteScreen = ({ navigation, handleCreateNote }) => {
     const [note, setNote] = useState('')
     const handleSaveNote = () => {
         const newNote = { note: note, id: Math.random() * 100 }

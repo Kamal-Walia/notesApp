@@ -6,12 +6,13 @@ import actions from '../store/actions'
 
 GoogleSignin.configure({
   webClientId: '1014094338472-m25ikse9pkp4ag3vrt0lm9nuddp87tch.apps.googleusercontent.com',
+  databaseURL:'https://notesapp-14bdb-default-rtdb.firebaseio.com/'
 });
 
 
 const Login = ({ handleLogin, onGoogleButtonPress }) => {
   const handleUserLogin = () => {
-    onGoogleButtonPress().then((e) =>  handleLogin(true)).catch(err => {
+    onGoogleButtonPress().then((user) =>  handleLogin(true, user)).catch(err => {
       Alert.alert('Some error occured')
     })
    
