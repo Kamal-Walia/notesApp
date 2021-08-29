@@ -1,1 +1,2 @@
 # notesApp
+![](notesApp-demo.gif)
