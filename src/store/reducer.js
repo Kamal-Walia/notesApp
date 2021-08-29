@@ -1,7 +1,7 @@
 
 const initialState = {
   isLoggedIn: false,
-  notes: [{ note: 'hello', id: 0 }, { note: 'world', id: 1 }, { note: 'test', id: 2 }]
+  notes: [{ note: 'hello', id: 0 }, { note: 'worlkmnkkd', id: 1 }, { note: 'test', id: 2 }]
 }
 
 const notesAppReducer = (state = initialState, action) => {

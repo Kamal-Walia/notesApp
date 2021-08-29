@@ -1,11 +1,20 @@
 import React from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, Alert } from 'react-native';
+import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import { connect } from 'react-redux';
 import actions from '../store/actions'
 
-const Login = ({ handleLogin }) => {
-  handleUserLogin = () => {
-    handleLogin(true)
+GoogleSignin.configure({
+  webClientId: '1014094338472-m25ikse9pkp4ag3vrt0lm9nuddp87tch.apps.googleusercontent.com',
+});
+
+
+const Login = ({ handleLogin, onGoogleButtonPress }) => {
+  const handleUserLogin = () => {
+    onGoogleButtonPress().then((e) =>  handleLogin(true)).catch(err => {
+      Alert.alert('Some error occured')
+    })
+   
   }
   return (
           <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -19,6 +28,7 @@ const Login = ({ handleLogin }) => {
 const mapStateToProps = (state) => ({})
 
 const mapDispatchToProps = {
+  onGoogleButtonPress: actions.onGoogleButtonPress,
   handleLogin: actions.handleLogin
 }
 
