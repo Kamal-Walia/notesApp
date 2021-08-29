@@ -16,7 +16,7 @@ const NotesScreen = ({ navigation, notes, handleDeleteNote, handleGetUserNotes }
   const handleCreateNote = () => {
     navigation.navigate('AddNoteScreen')
   }
-  console.log('KW101', notes)
+
   return (
     <View style={{ flex: 1, padding: 10 }}>
       {notes ? <FlatList

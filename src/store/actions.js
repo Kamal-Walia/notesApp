@@ -38,7 +38,6 @@ const handleGetUserNotes = () => {
   .ref(`notes/${uid}`)
   .once('value')
   .then(snapshot => {
-    console.log('User data: ', snapshot.val());
     dispatch(handleNotes(snapshot.val()))
   });
 }
