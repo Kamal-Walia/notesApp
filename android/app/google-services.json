@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "1014094338472",
+    "firebase_url": "https://notesapp-14bdb-default-rtdb.firebaseio.com",
     "project_id": "notesapp-14bdb",
     "storage_bucket": "notesapp-14bdb.appspot.com"
   },
@@ -22,6 +23,14 @@
           }
         },
         {
+          "client_id": "1014094338472-msa01dneotq45lrhmjanlmjunu5p4521.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.notesapp",
+            "certificate_hash": "e27f0920a63e11f5340fefea30abce1b867d2902"
+          }
+        },
+        {
           "client_id": "1014094338472-m25ikse9pkp4ag3vrt0lm9nuddp87tch.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -37,6 +46,13 @@
             {
               "client_id": "1014094338472-m25ikse9pkp4ag3vrt0lm9nuddp87tch.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "1014094338472-4jn4frvqqmjhd853g069c5sv90sqbk46.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.reactjs.native.example.notesApp"
+              }
             }
           ]
         }
