@@ -1,19 +1,19 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, FlatList } from 'react-native';
 
 const suggestions = ['Hello World, my name is Kamal', 'My interview is scheduled with urbanPiper at 2:00', 'Hello World, my name is']
 
-const SuggestionList = ({ note, setNote}) => {
+const SuggestionList = ({ note, setNote }) => {
     const [userSuggestions, setUserSuggestions] = useState([])
 
     useEffect(() => {
-        if(note){
+        if (note) {
             const userSuggestions = suggestions.filter(item => item.includes(note))
             const isUserTypedSuggestion = userSuggestions.find((item => item === note))
-            if(isUserTypedSuggestion) {
+            if (isUserTypedSuggestion) {
                 setUserSuggestions([])
             } else {
-            setUserSuggestions(userSuggestions)
+                setUserSuggestions(userSuggestions)
             }
         }
     }, [note])
