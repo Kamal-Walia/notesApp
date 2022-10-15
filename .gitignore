@@ -52,6 +52,8 @@ buck-out/
 */fastlane/report.xml
 */fastlane/Preview.html
 */fastlane/screenshots
+ios/GoogleService-Info.plist
+android/app/google-services.json
 
 # Bundle artifact
 *.jsbundle
